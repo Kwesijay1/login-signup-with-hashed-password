@@ -2,6 +2,7 @@
 require 'config.php';
 if(isset($_POST["submit"])){
     $email = $_POST["email"];
+    $username = $_POST["email"];
     $password = $_POST["password"];
     
     $stmtCheck = mysqli_prepare($conn, "SELECT * FROM tb_credentials WHERE username = ? OR email = ?");
