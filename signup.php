@@ -4,9 +4,13 @@ if (isset($_GET['error']) && $_GET['error'] === 'unexpected') {
     echo "<script> alert('Unexpected Error Occurred');</script>";
 }
 
-// Check for the error parameter in the URL
+// Check for the error parameter in the URL(Duplicate)
 if (isset($_GET['error']) && $_GET['error'] === 'user-exists') {
     echo "<script> alert('Name or Email Is Already Taken');</script>";
+}
+
+if (isset($_GET['error']) && $_GET['error'] === 'unmatched-password') {
+    echo "<script> alert('Unmatched Password');</script>";
 }
 ?>
 

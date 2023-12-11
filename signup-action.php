@@ -8,7 +8,7 @@ if (isset($_POST["submit"])) {
     $password = $_POST["password"];
     $confirmpassword = $_POST["confirmpassword"];
 
-    // Prepared statement for checking existing records
+    // Prepared statement for preventing SQL INJECTION
     $stmtCheck = mysqli_prepare($conn, "SELECT * FROM tb_credentials WHERE name = ? OR email = ?");
     mysqli_stmt_bind_param($stmtCheck, "ss", $name, $email);
     mysqli_stmt_execute($stmtCheck);
@@ -20,7 +20,12 @@ if (isset($_POST["submit"])) {
         // Redirect to the home page if username or email already exist
         header("Location: signup.php?error=user-exists");
         exit();
-    } else {
+    } 
+    elseif($password != $confirmpassword){
+        //Redirect to the home page if password doesn't match
+        header("Location: signup.php?error=unmatched-password");
+    }
+    else {
         // Prepared statement for inserting new record
         $stmtInsert = mysqli_prepare($conn, "INSERT INTO tb_credentials (name, username, email, password) VALUES (?, ?, ?, ?)");
 
@@ -36,9 +41,6 @@ if (isset($_POST["submit"])) {
         header("Location: index.php?success=signup-success");
         exit();
     }
-
-    mysqli_stmt_close($stmtCheck);
-    mysqli_close($conn);
 } else {
     header("Location: signup.php?error=unexpected");
     exit();

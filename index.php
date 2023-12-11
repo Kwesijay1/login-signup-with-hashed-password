@@ -3,6 +3,14 @@
 if (isset($_GET['success']) && $_GET['success'] === 'signup-success') {
     echo "<script> alert('Registration Successful, Please Sign In..');</script>";
 }
+//Checking for wrong password
+if (isset($_GET['error']) && $_GET['error'] === 'wrong-password') {
+    echo "<script> alert('Wrong password');</script>";
+}
+if (isset($_GET['error']) && $_GET['error'] === 'unexpected') {
+    echo "<script> alert('Unexpected Error Occurred');</script>";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en" >
@@ -25,7 +33,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'signup-success') {
                 <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
             </div>
             <span>or use your account</span>
-            <input type="text" name="usernameemail" placeholder="Username Or Email" />
+            <input type="text" name="email" placeholder="Username Or Email" />
             <input type="password" name="password" placeholder="Password" />
             <a href="#">Forgot your password?</a>
             <button type="submit" name="submit">Sign In</button>
