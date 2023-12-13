@@ -3,10 +3,7 @@
 if (isset($_GET['success']) && $_GET['success'] === 'signup-success') {
     echo "<script> alert('Registration Successful, Please Sign In..');</script>";
 }
-//Return for invalid email
-if (isset($_GET['error']) && $_GET['error'] === 'invalid-email') {
-    echo "<script> alert('Invalid Email');</script>";
-}
+
 //Return for wrong password
 if (isset($_GET['error']) && $_GET['error'] === 'wrong-password') {
     echo "<script> alert('Wrong Password');</script>";

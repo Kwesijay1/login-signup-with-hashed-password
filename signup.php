@@ -8,6 +8,10 @@ if (isset($_GET['error']) && $_GET['error'] === 'unexpected') {
 if (isset($_GET['error']) && $_GET['error'] === 'user-exists') {
     echo "<script> alert('Name or Email Is Already Taken');</script>";
 }
+//Return for invalid email
+if (isset($_GET['error']) && $_GET['error'] === 'invalid-email') {
+    echo "<script> alert('Invalid Email');</script>";
+}
 
 if (isset($_GET['error']) && $_GET['error'] === 'unmatched-password') {
     echo "<script> alert('Unmatched Password');</script>";
