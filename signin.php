@@ -1,10 +1,16 @@
 <?php
 require 'config.php';
 if(isset($_POST["submit"])){
-    $email = $_POST["email"];
+    $email = htmlspecialchars($_POST["email"], ENT_QUOTES, 'UTF-8'); //preventing XSS attacks
     $usernameOrEmail = $_POST["email"];
     $password = $_POST["password"];
     
+    //validating and sanitizing email format
+    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        header("Location: index.php?error=invalid-email");
+        exit();
+    }
+    //prepared statement for preventing SQL INJECTION
     $stmtCheck = mysqli_prepare($conn, "SELECT * FROM tb_credentials WHERE username = ? OR email = ?");
     mysqli_stmt_bind_param($stmtCheck, "ss", $usernameOrEmail, $usernameOrEmail);
     mysqli_stmt_execute($stmtCheck);

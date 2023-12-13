@@ -3,13 +3,19 @@
 if (isset($_GET['success']) && $_GET['success'] === 'signup-success') {
     echo "<script> alert('Registration Successful, Please Sign In..');</script>";
 }
-//Checking for wrong password
+//Return for invalid email
+if (isset($_GET['error']) && $_GET['error'] === 'invalid-email') {
+    echo "<script> alert('Invalid Email');</script>";
+}
+//Return for wrong password
 if (isset($_GET['error']) && $_GET['error'] === 'wrong-password') {
-    echo "<script> alert('Wrong password');</script>";
+    echo "<script> alert('Wrong Password');</script>";
 }
+//Return for Invalid user
 if (isset($_GET['error']) && $_GET['error'] === 'invalid-user') {
-    echo "<script> alert('invalid user');</script>";
+    echo "<script> alert('Invalid User');</script>";
 }
+//Return for unexpected error
 if (isset($_GET['error']) && $_GET['error'] === 'unexpected') {
     echo "<script> alert('Unexpected Error Occurred');</script>";
 }
