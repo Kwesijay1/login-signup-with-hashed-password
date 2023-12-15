@@ -1,0 +1,19 @@
+
+.col-md-12 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 100%;
+}
+.arrange {
+  margin-bottom: auto;
+  width: 100%;
+  position: relative;
+}
+.end-box {
+  padding: 20px;
+  color: #fff;
+  background-color: #000000;
+  font-size: 14px;
+}
