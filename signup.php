@@ -10,9 +10,11 @@ if (isset($_GET['error']) && $_GET['error'] === 'user-exists') {
 }
 //Return for invalid email
 if (isset($_GET['error']) && $_GET['error'] === 'invalid-email') {
-    echo "<script> alert('Invalid Email');</script>";
+    echo "<script> alert('Invalid Email Format');</script>";
 }
-
+if (isset($_GET['error']) && $_GET['error'] === 'weak-password') {
+    echo "<script> alert('Invalid Password Format');</script>";
+}
 if (isset($_GET['error']) && $_GET['error'] === 'unmatched-password') {
     echo "<script> alert('Unmatched Password');</script>";
 }

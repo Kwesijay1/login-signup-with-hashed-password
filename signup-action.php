@@ -18,6 +18,7 @@ if (isset($_POST["submit"])) {
     $password = $_POST["password"];
     $confirmpassword = $_POST["confirmpassword"];
 
+
     // Prepared statement for preventing SQL INJECTION
     $stmtCheck = mysqli_prepare($conn, "SELECT * FROM tb_credentials WHERE name = ? OR email = ?");
     mysqli_stmt_bind_param($stmtCheck, "ss", $name, $email);
@@ -37,13 +38,18 @@ if (isset($_POST["submit"])) {
         header("Location: signup.php?error=invalid-email");
         exit();
     }
-
+    //Checking the strength of the password
+    elseif(!isValidPassword($password)){
+        logEvent("Invalid Password", ["user_id" => $row['id']]);
+        header("Location: signup.php?error=weak-password");
+        exit();
+    }
+     //Redirect to the home page if password doesn't match
     elseif($password != $confirmpassword){
-        //Redirect to the home page if password doesn't match
         header("Location: signup.php?error=unmatched-password");
     }
+    // Prepared statement for inserting new record
     else {
-        // Prepared statement for inserting new record
         $stmtInsert = mysqli_prepare($conn, "INSERT INTO tb_credentials (name, username, email, password) VALUES (?, ?, ?, ?)");
 
         // Hashing the password before storing it in the database
@@ -63,5 +69,13 @@ if (isset($_POST["submit"])) {
     logEvent("UnexpectedError");
     header("Location: signup.php?error=unexpected");
     exit();
+}
+// Check if the password has at least one uppercase letter, one digit, one special character, and is 12 characters long
+function isValidPassword($password) {
+    if (!preg_match("/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_+=])[A-Za-z\d!@#$%^&*()-_+=]{12,}$/", $password)) {
+        return false;
+    }
+
+    return true;
 }
 ?>
